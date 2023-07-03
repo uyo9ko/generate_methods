@@ -1,0 +1,1 @@
+CUDA_VISIBLE_DEVICES=4,5,6,7 accelerate launch --num_processes=4 --main_process_port=20655 med_train.py 
