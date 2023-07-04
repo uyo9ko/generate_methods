@@ -3,20 +3,24 @@ from denoising_diffusion_pytorch import Unet, GaussianDiffusion, Trainer
 model = Unet(
     dim = 64,
     dim_mults = (1, 2, 4, 8),
-    flash_attn = True
+    flash_attn = True,
+    channels = 3,
+    self_condition=False
 )
 
 diffusion = GaussianDiffusion(
     model,
-    image_size = 128,
+    image_size = 256,
     timesteps = 1000,           # number of steps
-    sampling_timesteps = 250    # number of sampling timesteps (using ddim for faster inference [see citation for ddim paper])
+    sampling_timesteps = 250,    # number of sampling timesteps (using ddim for faster inference [see citation for ddim paper])
+    convert_image_to = 'L'
 )
 
 trainer = Trainer(
     diffusion,
-    folder='path/to/your/images',
-    train_batch_size = 32,
+    folder='/home/zhengxb/shenzh_work/data/cancer_fudan_data/neg',
+    results_folder = '/home/zhengxb/shenzh_work/AIGC_results/cancer_fudan_neg_exp',
+    train_batch_size = 48,
     train_lr = 8e-5,
     train_num_steps = 700000,         # total training steps
     gradient_accumulate_every = 2,    # gradient accumulation steps
