@@ -13,13 +13,13 @@ diffusion = GaussianDiffusion(
     image_size = 256,
     timesteps = 1000,           # number of steps
     sampling_timesteps = 250,    # number of sampling timesteps (using ddim for faster inference [see citation for ddim paper])
-    convert_image_to = 'L'
 )
 
 trainer = Trainer(
     diffusion,
     folder='/home/zhengxb/shenzh_work/data/cancer_fudan_data/neg',
     results_folder = '/home/zhengxb/shenzh_work/AIGC_results/cancer_fudan_neg_exp',
+    convert_image_to = 'L',
     train_batch_size = 48,
     train_lr = 8e-5,
     train_num_steps = 700000,         # total training steps
